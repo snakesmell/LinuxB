@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"  
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<meta charset="UTF-8" />
+<title>文件上传</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+<script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+<style>
+	#content{
+		/* float: left; */
+		margin: auto;
+		margin-left: 100px;
+		margin-top: 20px;
+		border: aquamarine;
+		border-style: solid;
+		width: 500px;
+		height: 500px;
+		padding-left: 100px;
+	}
+	
+	
+</style>
+</head>
+<body>
+      <div class="container">
+
+	      <div class="masthead">
+	        <h3 class="text-muted">Project name</h3>
+	        <nav>
+	          <ul class="nav nav-justified">
+	            <li class="active"><a href="index.html">Home</a></li>
+				<li><a href="line.html">文件列表</a></li>
+				<li><a href="file.html">文件上传</a></li>
+				<li><a href="index2.html">彩票</a></li>
+				<li><a href="add.html">增加</a></li>
+				
+	          </ul>
+	        </nav>
+	      </div>
+     </div>
+	<div id="content" >
+		<h1 th:inlines="text">文件上传</h1>
+		<form action="http://123.56.193.124//ProjectA/store/fileUpload" method="post" enctype="multipart/form-data" >
+		  <!-- <div class="form-group">
+			<label for="exampleInputEmail1">Email address</label>
+			<input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+		  </div>
+		  <div class="form-group">
+			<label for="exampleInputPassword1">Password</label>
+			<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+		  </div> -->
+		  <div class="form-group">
+			<label for="exampleInputFile">File input</label>
+			<input type="file" id="exampleInputFile" name="fileName">
+			<!-- <p class="help-block">Example block-level help text here.</p> -->
+		  </div>
+		 
+		  <button type="submit" class="btn btn-default">提交</button>
+		</form>
+	</div>
+</body>
+</html>

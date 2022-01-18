@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>华美信息</title>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+		<script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+		<style>
+			td{
+				/* border: solid; */
+				width: 20px; 
+				text-align: center;
+				font-style: oblique;
+				font-weight:bold;
+				color:LightCyan;
+			}
+			#redsub tr td{
+				width: 60px;
+				/* color: black; */
+			}
+		</style>
+	</head>
+	<body style="background-color: #B0C4DE;" onload="query(),querysub()">
+		
+		<div class="container">
+		
+		     <div class="masthead">
+		       <h3 class="text-muted">Project name</h3>
+		       <nav>
+		         <ul class="nav nav-justified">
+		           <li class="active"><a href="index.html">Home</a></li>
+						<li><a href="line.html">文件列表</a></li>
+						<li><a href="file.html">文件上传</a></li>
+						<li><a href="index2.html">彩票</a></li>
+						<li><a href="add.html">增加</a></li>
+						
+		         </ul>
+		       </nav>
+		     </div>
+		</div>
+		
+		<a href="add.html">AddData</a>
+		<a href="blue.html">Blue</a>
+		<!-- 表格1 -->
+		<br />
+		<label>Red</label>
+		Limit:<input type="text" id="limit" />
+		<button onclick="query()">查询</button>
+		<table id="redball" >
+		</table>
+		<!-- 表格2 -->
+		<br />		<label>RedSub</label>		Limit:<input type="text" id="limit2" />		<button onclick="querysub()">查询</button>		<table id="redsub" >		</table>
+
+<br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+		<script>
+			function query(){
+			 var limit =$("#limit").val();
+			 if(limit == 0 || limit == null  ){
+				 limit =20;
+			 }
+			 $.ajax({
+			           url:"http://123.56.193.124:80/ProjectA/Interface1",
+			           type:"GET",
+			           data:"limit="+limit,
+			           success:function(data){
+						var parent=eval('(' + data + ')');
+						var str="";
+						for(var i=0;i<parent.length;i++){
+							str+="<tr>";	
+							var sub=parent[i];
+							str+="<td>"+sub[0]+"</td>";
+							var k=0;
+							for(var m=1;m<=33;m++){
+								var flag=false;
+								for(var j=0;j<sub.length-1;j++){
+									if(sub[j]==m){
+										flag=true;
+										k++;
+										break;
+									}else{
+										flag=false;
+									}
+								}
+								if(flag==true){
+									switch(k){
+										case 1:
+											str+="<td style=\"color: red;background-color: Ivory;\">"+m+"</td>";
+											break;
+										case 2:
+											str+="<td style=\"color: #FF00FF;background-color: Ivory;\">"+m+"</td>";
+											break;
+										case 3:
+											str+="<td style=\"color: blue;background-color: Ivory;\">"+m+"</td>";
+											break;
+										case 4:
+											str+="<td style=\"color: #008000;background-color: Ivory;\">"+m+"</td>";
+											break;
+										case 5:
+											str+="<td style=\"color: #FF1493;background-color: Ivory;\">"+m+"</td>";
+											break;
+										case 6:
+											str+="<td style=\"color: black;background-color: Ivory;\">"+m+"</td>";
+											break;
+									}
+									
+								}else{
+									str+="<td>"+m+"</td>";
+								}
+							}
+							str += "</tr>";
+						}
+						$("#redball").html(str);
+					   }
+			 });
+			}
+			
+			
+			//r1 正常数据，r2=r2-r1,r3=r3-r2,r4=r4-r3,r5=r5-r4,r6=r6-r5
+			function querysub(){
+			 var limit =$("#limit2").val();
+			 if(limit == 0 || limit == null  ){
+				 limit =10;
+			 }
+			 $.ajax({
+			           url:"http://123.56.193.124:80/ProjectA/Interface3",
+			           type:"GET",
+			           data:"limit="+limit,
+			           success:function(data){
+						var parent=eval('(' + data + ')');
+						var str="";
+						for(var i=0;i<parent.length;i++){
+							str+="<tr>";	
+							var sub=parent[i];
+							str+="<td >"+sub[0]+"</td>";
+							str+="<td>"+sub[1]+"</td>";
+							str+="<td>"+sub[2]+"</td>";
+							str+="<td>"+sub[3]+"</td>";
+							str+="<td>"+sub[4]+"</td>";
+							str+="<td>"+sub[5]+"</td>";
+							str+="<td>"+sub[6]+"</td>";
+							// var k=0;
+							// for(var m=1;m<=33;m++){
+							// 	var flag=false;
+							// 	for(var j=0;j<sub.length-1;j++){
+							// 		if(sub[j]==m){
+							// 			flag=true;
+							// 			k++;
+							// 			break;
+							// 		}else{
+							// 			flag=false;
+							// 		}
+							// 	}
+							// 	if(flag==true){
+							// 		switch(k){
+							// 			case 1:
+							// 				str+="<td style=\"color: red;background-color: Ivory;\">"+m+"</td>";
+							// 				break;
+							// 			case 2:
+							// 				str+="<td style=\"color: #FF00FF;background-color: Ivory;\">"+m+"</td>";
+							// 				break;
+							// 			case 3:
+							// 				str+="<td style=\"color: blue;background-color: Ivory;\">"+m+"</td>";
+							// 				break;
+							// 			case 4:
+							// 				str+="<td style=\"color: #008000;background-color: Ivory;\">"+m+"</td>";
+							// 				break;
+							// 			case 5:
+							// 				str+="<td style=\"color: #FF1493;background-color: Ivory;\">"+m+"</td>";
+							// 				break;
+							// 			case 6:
+							// 				str+="<td style=\"color: black;background-color: Ivory;\">"+m+"</td>";
+							// 				break;
+							// 		}
+									
+							// 	}else{
+							// 		str+="<td>"+m+"</td>";
+							// 	}
+							// }
+							str += "</tr>";
+						}
+						$("#redsub").html(str);
+					   }
+			 });
+			}
+		</script>
+	</body>
+</html>

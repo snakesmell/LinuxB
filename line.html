@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>文件查看</title>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+		<script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+	</head>
+	<body>
+		<div class="container">
+		
+		     <div class="masthead">
+		       <h3 class="text-muted">Project name</h3>
+		       <nav>
+		         <ul class="nav nav-justified">
+		           <li class="active"><a href="index.html">Home</a></li>
+						<li><a href="line.html">文件列表</a></li>
+						<li><a href="file.html">文件上传</a></li>
+						<li><a href="index2.html">彩票</a></li>
+						<li><a href="add.html">增加</a></li>
+						
+		         </ul>
+		       </nav>
+		     </div>
+		</div>
+		<div id="files">
+		</div>
+		<script>
+			function query(){
+				 $.ajax({
+					   url:"http://123.56.193.124/ProjectA/query/list",
+					   type:"POST",
+					   // data:"tel="+tel+"&code="+code,
+					   success:function(data){
+						   // console.log(data);
+						   // var list=eval('(' + data + ')');
+						   var list=data;
+						   var html="";
+						   for(var i=0;i<list.length;i++){
+							   console.log(list[i]);
+							   var temp = list[i];
+							   html+="<div><a target='_blank' href=http://123.56.193.124/ProjectA/query/view?path="+temp.id+">"+temp.name+"</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href=http://123.56.193.124/ProjectA/query/delete?path="+temp.id+">删除</a></div>";
+							   
+						   }
+						   $("#files").html(html);
+					   }
+				 });
+			}
+			query();
+		</script>
+		
+		
+		<!-- <div><a href="http://123.56.193.124/ProjectA/interfaceFile?path=redis.conf">查看</a></div>
+		<div><a href="http://123.56.193.124/ProjectA/interfaceFile?path=工程经济36个高分值点.pdf">一建【工程经济】押题班-36个高分值点+做题技巧-XT.pdf</a></div> -->
+	</body>
+</html>
