@@ -4,8 +4,8 @@
 		<meta charset="utf-8">
 		<title>文件查看</title>
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
-		<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
 		<script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
 	</head>
 	<body>
 		<div class="container">
@@ -19,12 +19,13 @@
 						<li><a href="file.html">文件上传</a></li>
 						<li><a href="index2.html">彩票</a></li>
 						<li><a href="add.html">增加</a></li>
-						
 		         </ul>
 		       </nav>
 		     </div>
 		</div>
-		<div id="files">
+		<div>
+			<ul id="files" class="list-group">
+			</ul>
 		</div>
 		<script>
 			function query(){
@@ -38,9 +39,9 @@
 						   var list=data;
 						   var html="";
 						   for(var i=0;i<list.length;i++){
-							   console.log(list[i]);
+							   // console.log(list[i]);
 							   var temp = list[i];
-							   html+="<div><a target='_blank' href=http://123.56.193.124/ProjectA/query/view?path="+temp.id+">"+temp.name+"</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href=http://123.56.193.124/ProjectA/query/delete?path="+temp.id+">删除</a></div>";
+							   html+="&nbsp;&nbsp;<li class='list-group-item'><label>"+temp.ftype+"</label>&nbsp;&nbsp;<a target='_blank' href=http://123.56.193.124/ProjectA/query/view?path="+temp.id+">"+temp.name+"</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href=http://123.56.193.124/ProjectA/query/delete?path="+temp.id+">删除</a></li>";
 							   
 						   }
 						   $("#files").html(html);

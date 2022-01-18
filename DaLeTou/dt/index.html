@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>基础折线数据12444</title>
+    <!-- 引入刚刚下载的 ECharts 文件 -->
+    <script src="echarts.min.js"></script>
+	<script src="data.js"></script>
+  </head>
+  <body>
+    <!-- 为 ECharts 准备一个定义了宽高的 DOM -->
+	<div style="width: 100%;">
+		<div id="title"></div>
+		<div>
+			<button onclick="openNewTab('index1.html')">频率</button>
+			<button onclick="openNewTab('index3.html')">球型</button>
+			<button onclick="openNewTab('index2.html')">最近6期</button>
+		</div>
+		<div id="main" style="width: 70%;height:1200px;float: left;"></div>
+		<div id="main2" style="width: 30%;height:1200px;float: left;"></div>
+    </div>
+	<br />
+	<div style="width: 100%;">
+		
+		
+		<label>同比上一球差值</label>
+		<table  id="centerVal3"></table>
+		<br />
+		
+		<label>中轴线</label>
+		<table id="centerVal"></table>
+		<br />
+		
+		<label>出现球数去重</label>
+		<table id="centerVal2"></table>
+		
+		
+		
+	</div>
+	<script type="text/javascript">
+     //红球
+	 var myChart = echarts.init(document.getElementById('main'));
+	 //篮球
+	 var myChart2 = echarts.init(document.getElementById('main2'));
+	 //7+4
+     //7+4+1
+	 //中心线走势
+	 //中心线  求和/总次数
+	 //振幅	   最大值-中心线   中心线-最小值
+	 //当期=中心线+/-振幅
+	 //打开新的页面
+	 function openNewTab(url){
+	 	window.open(url);
+	 }
+	var len=datan2.length;
+    document.getElementById("title").innerHTML ="统计期数："+len;
+	//去重排序
+	function unique(arr) {
+		return Array.from(new Set(arr));
+	}					
+				
+	 var SumArry=new Array();	
+	 SumArry.push(datan1);
+	 SumArry.push(datan2);
+	 SumArry.push(datan3);
+	 SumArry.push(datan4);
+	 SumArry.push(datan5);
+	 SumArry.push(dataT1);
+	 SumArry.push(dataT2);
+	 
+	function sum(arr) {
+	  var s = 0;
+	  for (var i=arr.length-1; i>=0; i--) {
+	    s += arr[i];
+	  }
+	  return s;
+	}
+	
+	var n1=(sum(datan1)/datan1.length).toFixed(1);
+	var n2=(sum(datan2)/datan2.length).toFixed(1);
+	var n3=(sum(datan3)/datan3.length).toFixed(1);
+	var n4=(sum(datan4)/datan4.length).toFixed(1);
+	var n5=(sum(datan5)/datan5.length).toFixed(1);
+	var T2=(sum(dataT2)/dataT2.length).toFixed(1);
+	var T1=(sum(dataT1)/dataT1.length).toFixed(1);
+	
+	document.getElementById("centerVal").innerHTML ="<tr><td>"+n1+"，</td><td>"+n2+"，</td><td>"+n3+"，</td><td>"+n4+"，</td><td>"+n5+"，</td><td>"+T1+"，</td><td>"+T2+"</td></tr>";
+	  // 指定图表的配置项和数据
+     option = {
+       title: {
+         text: 'Stacked Line'
+       },
+       tooltip: {
+         trigger: 'axis'
+       },
+       legend: {
+         data: ['n1', 'n2', 'n3', 'n4', 'n5']
+       },
+	  
+       toolbox: {
+         feature: {
+           saveAsImage: {}
+         }
+       },
+       yAxis: {
+         
+         boundaryGap: false,
+		 axisLabel: {
+		       fontSize: 12
+		 },
+         data: datay
+       },
+	   
+       xAxis: {
+		 // type: 'category',
+         type: 'value',
+		 min: 1,
+		 max: 35,
+		 splitLine: {
+		       show: true
+		 },
+		 axisLabel: {
+		       fontSize: 14
+		 },
+		 splitNumber: 35	
+       },
+      series: [
+      				{  name: 'n1', 
+					   type: 'line',  
+					    smooth:true,//折点是圆弧状的
+						showSymbol: true,
+						symbol: 'circle',     //折点设定为实心点
+						symbolSize: 20,   //设定实心点的大小
+						itemStyle : {  
+                                normal : {  
+									color:'#00FFFF',//节点颜色
+                                    lineStyle:{  
+                                        color:'#00FFFF'  //折线颜色
+                                    },
+									label : {
+											show: true,
+											position: 'inside',
+											fontWeight: 'bold',
+											fontSize: 14,
+											verticalAlign: 'middle',
+											color: '#550000'//节点数值颜色
+									}
+                                }  
+                            },  
+					data: datan1
+					}, 
+      				{  name: 'n2', 
+					    type: 'line',
+						smooth:true,//折点是圆弧状的
+						showSymbol: true,
+						symbol: 'circle',     //折点设定为实心点
+						symbolSize: 20,   //设定实心点的大小
+						itemStyle : {  
+						        normal : {  
+									color:'#00FF00',//节点颜色
+						            lineStyle:{  
+						                color:'#00FF00'  //折线颜色
+						            },
+									label : {
+											show: true,
+											position: 'inside',
+											fontWeight: 'bold',
+											fontSize: 14,
+											verticalAlign: 'middle',
+											color: '#550000'//节点数值颜色
+									}
+						        }  
+						    },  
+						data: datan2
+					}, 
+      				{  name: 'n3', 
+						type: 'line', 
+						smooth:true,//折点是圆弧状的
+						showSymbol: true,
+						symbol: 'circle',     //折点设定为实心点
+						symbolSize: 20,   //设定实心点的大小
+						itemStyle : {  
+						        normal : {  
+									color:'#FFFF00',//节点颜色
+						            lineStyle:{  
+						                color:'#FFFF00'  //折线颜色
+						            },
+									label : {
+											show: true,
+											position: 'inside',
+											fontWeight: 'bold',
+											fontSize: 14,
+											verticalAlign: 'middle',
+											color: '#550000'//节点数值颜色
+									}
+						        }  
+						    }, 
+						data:datan3,
+						}, 
+      				{  name: 'n4', 
+						type: 'line',
+						smooth:true,//折点是圆弧状的
+						showSymbol: true,
+						symbol: 'circle',     //折点设定为实心点
+						symbolSize: 20,   //设定实心点的大小
+						itemStyle : {  
+						        normal : {  
+									color:'#FF00FF',//节点颜色
+						            lineStyle:{  
+						                color:'#FF00FF'  //折线颜色
+						            },
+									label : {
+											show: true,
+											position: 'inside',
+											fontWeight: 'bold',
+											fontSize: 14,
+											verticalAlign: 'middle',
+											color: '#ffffff'//节点数值颜色
+									}
+						        }  
+						    }, 
+						 data:datan4,
+						 }, 
+      				{  name: 'n5', 
+						type: 'line', 
+						smooth:true,//折点是圆弧状的
+						showSymbol: true,
+						symbol: 'circle',     //折点设定为实心点
+						symbolSize: 20,   //设定实心点的大小
+						itemStyle : {  
+						        normal : {  
+									color:'#ff4a83',//节点颜色
+						            lineStyle:{  
+						                color:'#ff4a83'  //折线颜色
+						            },
+									label : {
+											show: true,
+											position: 'inside',
+											fontWeight: 'bold',
+											fontSize: 14,
+											verticalAlign: 'middle',
+											color: '#ffffff'//节点数值颜色
+									}
+						        }  
+						    }, 
+						data: datan5,
+						}
+       ]
+     };
+	
+      // 使用刚指定的配置项和数据显示图表。
+      myChart.setOption(option);
+	  
+	 
+	   // 指定图表的配置项和数据
+	  option2 = {
+	    title: {
+	      text: 'Stacked Line'
+	    },
+	    tooltip: {
+	      trigger: 'axis'
+	    },
+	    legend: {
+	      data: ['n6','n7']
+	    },
+	    toolbox: {
+	      feature: {
+	        saveAsImage: {}
+	      }
+	    },
+	    yAxis: {
+	      
+	      boundaryGap: false,
+	  		 axisLabel: {
+	  		       fontSize: 12
+	  		 },
+	      data: datay
+	    },
+	    
+	    xAxis: {
+	  		 // type: 'category',
+	      type: 'value',
+	  		 min: 1,
+	  		 max: 12,
+	  		 splitLine: {
+	  		       show: true
+	  		 },
+	  		 axisLabel: {
+	  		       fontSize: 14
+	  		 },
+	  		 splitNumber: 12	
+	    },
+	   series: [
+	   				
+	   				{  name: 'n5',
+	   					   type: 'line',  
+	   					    smooth:true,//折点是圆弧状的
+	   						showSymbol: true,
+	   						symbol: 'circle',     //折点设定为实心点
+	   						symbolSize: 20,   //设定实心点的大小
+	   						itemStyle : {  
+	   				             normal : {  
+	   									color:'#ff0000',//节点颜色
+	   				                 lineStyle:{  
+	   				                     color:'#ff0000'  //折线颜色
+	   				                 },
+	   									label : {
+	   											show: true,
+	   											position: 'inside',
+	   											fontWeight: 'bold',
+	   											fontSize: 14,
+	   											verticalAlign: 'middle',
+	   											color: '#ffffff'//节点数值颜色
+	   									}
+	   				             }  
+	   				         },  
+	   					data: dataT1
+	   					},
+					{  name: 'n6', 
+	  					   type: 'line',  
+	  					    smooth:true,//折点是圆弧状的
+	  						showSymbol: true,
+	  						symbol: 'circle',     //折点设定为实心点
+	  						symbolSize: 20,   //设定实心点的大小
+	  						itemStyle : {  
+	                             normal : {  
+	  									color:'#5555ff',//节点颜色
+	                                 lineStyle:{  
+	                                     color:'#5555ff'  //折线颜色
+	                                 },
+	  									label : {
+	  											show: true,
+	  											position: 'inside',
+	  											fontWeight: 'bold',
+	  											fontSize: 14,
+	  											verticalAlign: 'middle',
+	  											color: '#ffffff'//节点数值颜色
+	  									}
+	                             }  
+	                         },  
+	  					data: dataT2
+	  					}
+	   				
+	    ]
+	  };
+	  	
+	   // 使用刚指定的配置项和数据显示图表。
+	   myChart2.setOption(option2);
+	   
+	   function getSubVal(){
+		   var sumshift=new Array();
+		   var data1=datan1.concat();
+		   var data2=datan2.concat();
+		   var data3=datan3.concat();
+		   var data4=datan4.concat();
+		   var data5=datan5.concat();
+		   var data6=dataT1.concat();
+		   var data7=dataT2.concat();
+		   data1.shift();
+		   data2.shift();
+		   data3.shift();
+		   data4.shift();
+		   data5.shift();
+		   data6.shift();
+		   data7.shift();
+		   
+		   sumshift.push(data1);
+		   sumshift.push(data2);
+		   sumshift.push(data3);
+		   sumshift.push(data4);
+		   sumshift.push(data5);
+		   sumshift.push(data6);
+		   sumshift.push(data7);
+		   
+		   var sumletArry=new Array();
+		   for(var i=0;i<sumshift.length;i++){
+			   console.log("begin:");
+			   let tl=new Array();
+			   for(var k=0;k<30;k++){
+				   if(k>29){
+					   break;
+				   }else{
+					  // console.log("y:"+SumArry[i][k]);
+					  // console.log("g:"+sumshift[i][k]);
+					  var tm=Math.abs(SumArry[i][k] - sumshift[i][k]);
+					  // console.log(tm);
+					  tl.push(tm);
+				   }
+			   }
+			   sumletArry.push(tl);
+		   }
+		   
+		   
+		   /* 出现球数去重 */
+		   var temp3="";
+		   for(var i=0;i<sumletArry.length-1;i++){
+			   temp3+="<tr>";
+			   for(var j=0;j<sumletArry[i].length;j++){
+				   console.log(sumletArry[i]);
+				   console.log(j);
+					 temp3+="<td style='color: #0000ff;'>"+sumletArry[i][j]+"</td>";
+					 temp3+="<td>、</td>";
+					 temp3+="<td></td>";
+				}
+				temp3+="</tr>";
+		   }
+		   
+		   temp3+="<tr>";
+		   for(var j=0;j<sumletArry[6].length;j++){
+						 temp3+="<td style='color: #335611;'>"+sumletArry[i][j]+"</td>";
+						 temp3+="<td>、</td>";
+						 temp3+="<td></td>";
+					}
+					temp3+="</tr>";
+		   document.getElementById("centerVal3").innerHTML = temp3;
+		   // console.log(sumletArry);
+	   }
+	   
+	   getSubVal();
+    </script>
+  </body>
+</html>

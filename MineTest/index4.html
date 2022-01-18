@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>球形排列</title>
+		<script src="echarts.min.js"></script>
+		<script src="http://123.56.193.124/ProjectA/queryData/list"></script>
+	</head>
+	<body>
+		<div style="text-align: center;"><label>球形排列</label></div>
+		<div style="width: 100%;">
+			<div id="main1" style="width: 500px;height:300px;float: left;"></div>
+			<div id="main2" style="width: 500px;height:300px;float: left;"></div>
+			<div id="main3" style="width: 500px;height:300px;float: left;"></div>
+			<div id="main4" style="width: 500px;height:300px;float: left;"></div>
+			<div id="main5" style="width: 500px;height:300px;float: left;"></div>
+			<div id="main6" style="width: 500px;height:300px;float: left;"></div>
+			<div id="main7" style="width: 500px;height:300px;float: left;"></div>
+		</div>
+		
+		
+		
+		<table  id="centerVal3"></table>
+		
+		
+		<script>
+			var temp1=datan1.concat();
+			
+			
+			for(var i=0;i<datan1.length;i++){
+				var last=sum(temp1);
+				var res=last/temp1.length;
+				console.log(res);
+				temp1.pop();
+			}
+			function sum(arr) {
+			    var s = 0;
+			    for (var i=arr.length-1; i>=0; i--) {
+			        s += arr[i];
+			    }
+			    return s;
+			}
+		</script>
+	</body>
+</html>

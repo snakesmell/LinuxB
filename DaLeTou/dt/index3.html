@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>球形排列</title>
+		<script src="echarts.min.js"></script>
+		<script src="data.js"></script>
+	</head>
+	<body>
+		<div style="text-align: center;"><label>球形排列</label></div>
+		<div style="width: 100%;">
+			<div id="main1" style="width: 500px;height:300px;float: left;"></div>
+			<div id="main2" style="width: 500px;height:300px;float: left;"></div>
+			<div id="main3" style="width: 500px;height:300px;float: left;"></div>
+			<div id="main4" style="width: 500px;height:300px;float: left;"></div>
+			<div id="main5" style="width: 500px;height:300px;float: left;"></div>
+			<br />
+			<div id="main6" style="width: 500px;height:300px;float: left;"></div>
+			<div id="main7" style="width: 500px;height:300px;float: left;"></div>
+		</div>
+		
+		
+		
+		<table  id="centerVal3"></table>
+		
+		
+		<script>
+		var myChart1 = echarts.init(document.getElementById('main1'));
+		var myChart2 = echarts.init(document.getElementById('main2'));
+		var myChart3 = echarts.init(document.getElementById('main3'));
+		var myChart4 = echarts.init(document.getElementById('main4'));
+		var myChart5 = echarts.init(document.getElementById('main5'));
+		var myChart6 = echarts.init(document.getElementById('main6'));
+		var myChart7 = echarts.init(document.getElementById('main7'));
+		
+			function getSubVal(){
+				
+						var SumArry=new Array();
+						SumArry.push(datan1);
+						SumArry.push(datan2);
+						SumArry.push(datan3);
+						SumArry.push(datan4);
+						SumArry.push(datan5);
+						SumArry.push(dataT1);
+						SumArry.push(dataT2);
+				
+					   var sumshift=new Array();
+					   var data1=datan1.concat();
+					   var data2=datan2.concat();
+					   var data3=datan3.concat();
+					   var data4=datan4.concat();
+					   var data5=datan5.concat();
+					   var data6=dataT1.concat();
+					   var data7=dataT2.concat();
+					   // data1.shift();
+					   // data2.shift();
+					   // data3.shift();
+					   // data4.shift();
+					   // data5.shift();
+					   // data6.shift();
+					   // data7.shift();
+					   
+					   sumshift.push(data1);
+					   sumshift.push(data2);
+					   sumshift.push(data3);
+					   sumshift.push(data4);
+					   sumshift.push(data5);
+					   sumshift.push(data6);
+					   sumshift.push(data7);
+					   
+					   var sumletArry=sumshift;
+					   // for(var i=0;i<sumshift.length;i++){
+						  //  console.log("begin:");
+						  //  let tl=new Array();
+						  //  for(var k=0;k<30;k++){
+							 //   if(k>29){
+								//    break;
+							 //   }else{
+								//   // console.log("y:"+SumArry[i][k]);
+								//   // console.log("g:"+sumshift[i][k]);
+								//   var tm=Math.abs(SumArry[i][k] - sumshift[i][k]);
+								//   // console.log(tm);
+								//   tl.push(tm);
+							 //   }
+						  //  }
+						  //  sumletArry.push(tl);
+					   // }
+					   
+					   
+					   /* 出现球数去重 */
+					   var temp3="";
+					   for(var i=0;i<sumletArry.length-1;i++){
+						   temp3+="<tr>";
+						   for(var j=0;j<sumletArry[i].length;j++){
+							   // console.log(sumletArry[i]);
+							   // console.log(j);
+								 temp3+="<td style='color: #0000ff;'>"+sumletArry[i][j]+"</td>";
+								 temp3+="<td>、</td>";
+								 temp3+="<td></td>";
+							}
+							temp3+="</tr>";
+					   }
+					   
+					   temp3+="<tr>";
+					   for(var j=0;j<sumletArry[6].length;j++){
+									 temp3+="<td style='color: #335611;'>"+sumletArry[i][j]+"</td>";
+									 temp3+="<td>、</td>";
+									 temp3+="<td></td>";
+								}
+								temp3+="</tr>";
+					   document.getElementById("centerVal3").innerHTML = temp3;
+					   // console.log(sumletArry);
+					   return sumletArry;
+			}
+		var finalArry=getSubVal();
+		
+		option1 = {
+			title: { text: 'N1',   left: 'center'  },
+			  xAxis: {type: 'category',axisLabel: {color:'#ff3300' },data: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30], },
+			  yAxis: {	type: 'value',name:'差值',	 
+			  axisLabel: {color:'#0000ff' }	  },	
+			  series: [	{data: finalArry[0], label:{show:true, position: 'top'}, type: 'bar'}  ,
+                        {
+                            name:'折线',
+                            type:'line',
+                            itemStyle : {  /*设置折线颜色*/
+                                normal : {
+                                   color:'#ffcd00'
+                                }
+                            },
+                            data:finalArry[0]
+                        }]
+			};
+		 myChart1.setOption(option1);
+		 
+		 option2 = {
+		 	title: { text: 'N2',   left: 'center'  },
+		 	  xAxis: {type: 'category',axisLabel: {color:'#ff3300' },data: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30], },
+		 	  yAxis: {	type: 'value',	name:'差值',axisLabel: {color:'#0000ff' }  },
+		 	  series: [	{data: finalArry[1], label:{show:true, position: 'top'}, type: 'bar'}  ,
+                        {
+                            name:'折线',
+                            type:'line',
+                            itemStyle : {  /*设置折线颜色*/
+                                normal : {
+                                   color:'#ffcd00'
+                                }
+                            },
+                            data:finalArry[1]
+                        }]
+		 	};
+		  myChart2.setOption(option2);
+		  
+		  option3 = {
+		  	title: { text: 'N3',   left: 'center'  },
+		  	  xAxis: {
+		  		type: 'category',axisLabel: {color:'#ff3300' },
+		  		data: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30],
+		  	  },
+		  	  yAxis: {	type: 'value'	,	name:'差值',axisLabel: {color:'#0000ff' }  },
+		  	  series: [	{data: finalArry[2], label:{show:true, position: 'top'}, type: 'bar'}  ,
+                        {
+                            name:'折线',
+                            type:'line',
+                            itemStyle : {  /*设置折线颜色*/
+                                normal : {
+                                   color:'#ffcd00'
+                                }
+                            },
+                            data:finalArry[2]
+                        }]
+		  	};
+		   myChart3.setOption(option3);
+		   
+		   option4 = {
+		   	title: { text: 'N4',   left: 'center'  },
+		   	  xAxis: {
+		   		type: 'category',axisLabel: {color:'#ff3300' },
+		   		data: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30],
+		   	  },
+		   	  yAxis: {	type: 'value'	,	name:'差值',axisLabel: {color:'#0000ff' }  },
+		   	  series: [	{data: finalArry[3], label:{show:true, position: 'top'}, type: 'bar'}  ,
+                        {
+                            name:'折线',
+                            type:'line',
+                            itemStyle : {  /*设置折线颜色*/
+                                normal : {
+                                   color:'#ffcd00'
+                                }
+                            },
+                            data:finalArry[3]
+                        }]
+		   	};
+		    myChart4.setOption(option4);
+			
+			option5 = {
+				title: { text: 'N5',   left: 'center'  },
+				  xAxis: {
+					type: 'category',axisLabel: {color:'#ff3300' },
+					data: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30],
+				  },
+				  yAxis: {	type: 'value'	,	name:'差值',axisLabel: {color:'#0000ff' }  },
+				  series: [	{data: finalArry[4], label:{show:true, position: 'top'}, type: 'bar'}  ,
+                        {
+                            name:'折线',
+                            type:'line',
+                            itemStyle : {  /*设置折线颜色*/
+                                normal : {
+                                   color:'#ffcd00'
+                                }
+                            },
+                            data:finalArry[4]
+                        }]
+				};
+			 myChart5.setOption(option5);
+			 
+			 option6 = {
+			 	title: { text: 'B1',   left: 'center'  },
+			 	  xAxis: {
+			 		type: 'category',axisLabel: {color:'#ff3300' },
+			 		data: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30],
+			 	  },
+			 	  yAxis: {	type: 'value'	,	name:'差值',axisLabel: {color:'#0000ff' }  },
+			 	  series: [	{data: finalArry[5], label:{show:true, position: 'top'}, type: 'bar'}  ,
+                        {
+                            name:'折线',
+                            type:'line',
+                            itemStyle : {  /*设置折线颜色*/
+                                normal : {
+                                   color:'#ffcd00'
+                                }
+                            },
+                            data:finalArry[5]
+                        }]
+			 	};
+			  myChart6.setOption(option6);
+			  
+			  option7 = {
+			  	title: { text: 'B2',   left: 'center'  },
+			  	  xAxis: {
+			  		type: 'category',axisLabel: {color:'#ff3300' },
+			  		data: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30],
+			  	  },
+			  	  yAxis: {	type: 'value'	,	name:'差值',axisLabel: {color:'#0000ff' }  },
+			  	  series: [	{data: finalArry[6], label:{show:true, position: 'top'}, type: 'bar'}  ,
+                        {
+                            name:'折线',
+                            type:'line',
+                            itemStyle : {  /*设置折线颜色*/
+                                normal : {
+                                   color:'#ffcd00'
+                                }
+                            },
+                            data:finalArry[6]
+                        }]
+			  	};
+			   myChart7.setOption(option7);
+		</script>
+	</body>
+</html>
