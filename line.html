@@ -41,8 +41,8 @@
 						   for(var i=0;i<list.length;i++){
 							   // console.log(list[i]);
 							   var temp = list[i];
-							   html+="&nbsp;&nbsp;<li class='list-group-item'><label>"+temp.ftype+"</label>&nbsp;&nbsp;<a target='_blank' href=http://123.56.193.124/ProjectA/query/view?path="+temp.id+">"+temp.name+"</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href=http://123.56.193.124/ProjectA/query/delete?path="+temp.id+">删除</a></li>";
-							   
+							   html+="&nbsp;&nbsp;<li class='list-group-item'><label>"+temp.ftype+"</label>&nbsp;&nbsp;<a target='_blank' href=http://123.56.193.124/ProjectA/query/view?path="+temp.id+">"+temp.name+"</a>&nbsp;&nbsp;";
+							   html+="&nbsp;&nbsp;<label>阅读次数："+temp.views+"</label>&nbsp;&nbsp;&nbsp;&nbsp;<a href=http://123.56.193.124/ProjectA/query/delete?path="+temp.id+">删除</a></li>";
 						   }
 						   $("#files").html(html);
 					   }
